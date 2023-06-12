@@ -1,6 +1,6 @@
-package com.tawk.github_users.features.users_details.domain.use_case
+package com.tawk.github_users.features.user_deatils.domain.use_case
 
-import com.tawk.github_users.features.users_details.domain.enities.UserDetails
+import com.tawk.github_users.features.user_deatils.domain.enities.UserDetails
 import com.tawk.github_users.features.user_deatils.domain.repository.UserDetailsRepository
 import javax.inject.Inject
 

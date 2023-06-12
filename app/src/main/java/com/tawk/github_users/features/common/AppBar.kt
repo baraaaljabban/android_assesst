@@ -34,102 +34,125 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.tawk.github_users.core.navigator.ROUTE_USER
-import com.tawk.github_users.core.navigator.ROUTE_USERS
+import com.tawk.github_users.core.navigator.SEARCH_RESULT
+import com.tawk.github_users.core.theme.TawkTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AppBar(screen: String, navHostController: NavHostController) {
 
-    TopAppBar(backgroundColor = Color.White) {
-        if (screen == ROUTE_USERS) {
-            val searchQueryState = remember { mutableStateOf("") }
-            val interactionSource = remember { MutableInteractionSource() }
-
-            BasicTextField(
-                value = searchQueryState.value,
-                onValueChange = { searchQueryState.value = it },
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth()
-                    .border(
-                        width = 2.dp,
-                        color = Color.Black,
-                        shape = RoundedCornerShape(20.dp)
-                    ),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                keyboardActions = KeyboardActions(onSearch = {
-
-                    val query = searchQueryState.value
-                    navHostController.navigate(
-                        "searchResult/$query"
-
+    TawkTheme() {
+        TopAppBar(backgroundColor = Color.White) {
+            if (screen == ROUTE_USER) {
+                IconButton(onClick = { navHostController.navigateUp() }) {
+                    Icon(
+                        imageVector = Icons.Filled.KeyboardArrowLeft,
+                        contentDescription = "Back", tint = Color.Black,
                     )
-
-                }),
-
+                }
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(end = 48.dp)
                 ) {
-                TextFieldDefaults.TextFieldDecorationBox(
-                    value = searchQueryState.value,
-                    innerTextField = it,
-                    singleLine = true,
-                    enabled = true,
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "Search Icon",
-                            tint = Color.Black
-                        )
-                    },
-                    visualTransformation = VisualTransformation.None,
-                    trailingIcon = {
-                        if (searchQueryState.value.isNotEmpty()) {
-                            IconButton(
-                                onClick = {
-                                    searchQueryState.value = "";
-
-                                },
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Clear,
-                                    contentDescription = "Clear Search Icon", tint = Color.Black
-                                )
-                            }
-                        }
-                    },
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.Transparent,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent
-                    ),
-                    interactionSource = interactionSource,
-                    contentPadding = TextFieldDefaults.textFieldWithoutLabelPadding(
-                        top = 2.dp, bottom = 2.dp
+                    Text(
+                        text = "Name",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.align(Alignment.Center),
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = Color.Black
                     )
-                )
+                }
+            } else if (screen == SEARCH_RESULT) {
+                IconButton(onClick = { navHostController.navigateUp() }) {
+                    Icon(
+                        imageVector = Icons.Filled.KeyboardArrowLeft,
+                        contentDescription = "Back", tint = Color.Black,
+                    )
+                }
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(end = 48.dp)
+                ) {
+                    Text(
+                        text = "Name",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.align(Alignment.Center),
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = Color.Black
+                    )
+                }
+            } else {
+                val searchQueryState = remember { mutableStateOf("") }
+                val interactionSource = remember { MutableInteractionSource() }
+
+                BasicTextField(
+                    value = searchQueryState.value,
+                    onValueChange = { searchQueryState.value = it },
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth()
+                        .border(
+                            width = 2.dp,
+                            color = Color.Black,
+                            shape = RoundedCornerShape(20.dp)
+                        ),
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                    keyboardActions = KeyboardActions(onSearch = {
+
+                        val query = searchQueryState.value
+                        navHostController.navigate(
+                            "searchResult/$query"
+
+                        )
+
+                    }),
+
+                    ) {
+                    TextFieldDefaults.TextFieldDecorationBox(
+                        value = searchQueryState.value,
+                        innerTextField = it,
+                        singleLine = true,
+                        enabled = true,
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Search Icon",
+                                tint = Color.Black
+                            )
+                        },
+                        visualTransformation = VisualTransformation.None,
+                        trailingIcon = {
+                            if (searchQueryState.value.isNotEmpty()) {
+                                IconButton(
+                                    onClick = {
+                                        searchQueryState.value = "";
+
+                                    },
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Clear,
+                                        contentDescription = "Clear Search Icon", tint = Color.Black
+                                    )
+                                }
+                            }
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent
+                        ),
+                        interactionSource = interactionSource,
+                        contentPadding = TextFieldDefaults.textFieldWithoutLabelPadding(
+                            top = 2.dp, bottom = 2.dp
+                        )
+                    )
+                }
+
             }
 
-        } else {
-            IconButton(onClick = { navHostController.navigateUp() }) {
-                Icon(
-                    imageVector = Icons.Filled.KeyboardArrowLeft,
-                    contentDescription = "Back", tint = Color.Black,
-                )
-            }
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(end = 48.dp)
-            ) {
-                Text(
-                    text = if (screen == ROUTE_USER) "Name" else "Search Result",
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.align(Alignment.Center),
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = Color.Black
-                )
-            }
         }
-
     }
 }
 

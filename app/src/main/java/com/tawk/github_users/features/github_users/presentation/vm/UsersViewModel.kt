@@ -13,16 +13,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class UsersViewModel @Inject constructor(
-    private val fetchUsersUseCase: FetchGithubUsers, connectivityMonitor: ConnectivityMonitor,
+    private val fetchUsersUseCase: FetchGithubUsers,
+    connectivityMonitor: ConnectivityMonitor,
     private val searchUsers: SearchUsers
 ) : ConnectivityViewModel(connectivityMonitor) {
-    var usersData: Flow<PagingData<List<User>>>? = null
+    var usersData: Flow<PagingData<List<User>>> = emptyFlow()
     private var isDataFetched = false
 
     private val _searchResults = MutableStateFlow<UserSearchResult>(
@@ -34,27 +36,34 @@ class UsersViewModel @Inject constructor(
 
     fun fetchPagingUsers(): Flow<PagingData<List<User>>> {
         return if (isDataFetched) {
-            usersData!!
+            usersData
         } else {
-            fetchUsersUseCase.getPagingGithubUsers().cachedIn(viewModelScope).also {
-                usersData = it
-                isDataFetched = true
-            }
+            runCatching {
+                fetchUsersUseCase.getPagingGithubUsers().cachedIn(viewModelScope)
+            }.fold(
+                onSuccess = { result ->
+                    usersData = result
+                    isDataFetched = true
+                    result
+                },
+                onFailure = { exception ->
+                    usersData = emptyFlow()
+                    emptyFlow()
+                }
+            )
         }
-
     }
+
 
     fun searchUsers(query: String) {
         viewModelScope.launch {
-            kotlin.runCatching { searchUsers.searchGithubUsers(query) }
-                .onSuccess {
-                    _searchResults.value = UserSearchResult.Success(it)
-                    Log.e("UserSearchResult.Success", it.toString())
-                }
-                .onFailure {
-                    _searchResults.value = UserSearchResult.Error(it.message.toString())
-                    Log.e("UserSearchResult.Error", it.toString())
-                }
+            kotlin.runCatching { searchUsers.searchGithubUsers(query) }.onSuccess {
+                _searchResults.value = UserSearchResult.Success(it)
+                Log.e("UserSearchResult.Success", it.toString())
+            }.onFailure {
+                _searchResults.value = UserSearchResult.Error(it.message.toString())
+                Log.e("UserSearchResult.Error", it.toString())
+            }
         }
     }
 

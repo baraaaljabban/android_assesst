@@ -1,4 +1,4 @@
-package com.tawk.github_users.core.ui.theme
+package com.tawk.github_users.core.theme
 
 import androidx.compose.ui.graphics.Color
 

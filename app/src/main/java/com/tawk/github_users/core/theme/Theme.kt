@@ -1,4 +1,4 @@
-package com.tawk.github_users.core.ui.theme
+package com.tawk.github_users.core.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,12 +14,16 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.tawk.github_users.core.theme.Typography
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
-    tertiary = Pink80
+    tertiary = Pink80,
+    background = PurpleGrey80,
+    onSurface = PurpleGrey80,
+    surface = PurpleGrey80,
+    onPrimary = Purple80, onBackground = PurpleGrey80,
+
 )
 
 private val LightColorScheme = lightColorScheme(
