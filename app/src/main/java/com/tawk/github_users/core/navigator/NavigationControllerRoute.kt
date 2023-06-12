@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.tawk.github_users.features.github_users.presentation.widgets.PagingListScreen
 import com.tawk.github_users.features.github_users.presentation.widgets.SearchResultScreen
-import com.tawk.github_users.features.user_deatils.presentation.ui.widgets.UserDetailsScreen
+import com.tawk.github_users.features.user_deatils.presentation.widgets.UserDetailsScreen
 
 @Composable
 fun NavigationComposable(
@@ -52,7 +52,6 @@ fun NavigationComposable(
             UserDetailsScreen(
                 username,
                 localId,
-                navController,
             )
         }
 

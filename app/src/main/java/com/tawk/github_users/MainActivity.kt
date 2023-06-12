@@ -22,7 +22,7 @@ import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import com.tawk.github_users.core.navigator.NavigationComposable
 import com.tawk.github_users.core.navigator.UserDetailsScreenArgsEvent
-import com.tawk.github_users.core.ui.theme.TawkTheme
+import com.tawk.github_users.core.theme.TawkTheme
 import com.tawk.github_users.features.common.AppBar
 import com.tawk.github_users.features.common.OfflineSnackBar
 import dagger.hilt.android.AndroidEntryPoint

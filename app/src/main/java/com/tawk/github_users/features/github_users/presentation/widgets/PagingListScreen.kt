@@ -39,7 +39,7 @@ fun PagingListScreen() {
                     Divider()
                 }
 
-                when (val state = users.loadState.refresh) { //FIRST LOAD
+                when (users.loadState.refresh) { //FIRST LOAD
                     is LoadState.Error -> {
                         //TODO Error Item
                         //state.error to get error message

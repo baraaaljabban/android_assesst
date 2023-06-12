@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.tawk.github_users.core.theme.TawkTheme
 import com.tawk.github_users.features.github_users.presentation.vm.UserSearchResult
 import com.tawk.github_users.features.github_users.presentation.vm.UsersViewModel
 
@@ -17,23 +18,25 @@ fun SearchResultScreen(query: String) {
         viewModel.searchUsers(query)
     }
     val searchResultsState = viewModel.searchResults.collectAsState()
-
-    when (val searchResult = searchResultsState.value) {
-        is UserSearchResult.Success -> {
-            if (searchResult.users.isEmpty()) {
-                Text(text = "No data found")
-            } else {
-                LazyColumn {
-                    items(searchResult.users.size) { user ->
-                        UserItem(searchResult.users[user], user)
-                        Divider()
+    TawkTheme{
+        when (val searchResult = searchResultsState.value) {
+            is UserSearchResult.Success -> {
+                if (searchResult.users.isEmpty()) {
+                    Text(text = "No data found")
+                } else {
+                    LazyColumn {
+                        items(searchResult.users.size) { user ->
+                            UserItem(searchResult.users[user], user)
+                            Divider()
+                        }
                     }
                 }
             }
-        }
 
-        is UserSearchResult.Error -> {
-            Text(text = "Error: ${searchResult.message}")
+            is UserSearchResult.Error -> {
+                Text(text = "Error: ${searchResult.message}")
+            }
         }
     }
+
 }

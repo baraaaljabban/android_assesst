@@ -23,7 +23,6 @@ fun UserAvatar(
     isRounded: Boolean = true,
     height: Int = 70,
     width: Int = 70,
-    fillMaxWidth: Boolean = false
 
 ) {
     Box(
