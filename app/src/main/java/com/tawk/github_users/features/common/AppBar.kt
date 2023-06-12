@@ -1,6 +1,7 @@
 package com.tawk.github_users.features.common
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -35,19 +36,18 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.tawk.github_users.core.navigator.ROUTE_USER
 import com.tawk.github_users.core.navigator.SEARCH_RESULT
-import com.tawk.github_users.core.theme.TawkTheme
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AppBar(screen: String, navHostController: NavHostController) {
 
-    TawkTheme() {
-        TopAppBar(backgroundColor = Color.White) {
-            if (screen == ROUTE_USER) {
+    TopAppBar {
+        when (screen) {
+            ROUTE_USER -> {
                 IconButton(onClick = { navHostController.navigateUp() }) {
                     Icon(
                         imageVector = Icons.Filled.KeyboardArrowLeft,
-                        contentDescription = "Back", tint = Color.Black,
+                        contentDescription = "Back",
                     )
                 }
                 Box(
@@ -60,10 +60,11 @@ fun AppBar(screen: String, navHostController: NavHostController) {
                         textAlign = TextAlign.Center,
                         modifier = Modifier.align(Alignment.Center),
                         style = MaterialTheme.typography.headlineSmall,
-                        color = Color.Black
                     )
                 }
-            } else if (screen == SEARCH_RESULT) {
+            }
+
+            SEARCH_RESULT -> {
                 IconButton(onClick = { navHostController.navigateUp() }) {
                     Icon(
                         imageVector = Icons.Filled.KeyboardArrowLeft,
@@ -76,14 +77,15 @@ fun AppBar(screen: String, navHostController: NavHostController) {
                         .padding(end = 48.dp)
                 ) {
                     Text(
-                        text = "Name",
+                        text = "Search Result",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.align(Alignment.Center),
                         style = MaterialTheme.typography.headlineSmall,
-                        color = Color.Black
                     )
                 }
-            } else {
+            }
+
+            else -> {
                 val searchQueryState = remember { mutableStateOf("") }
                 val interactionSource = remember { MutableInteractionSource() }
 
@@ -133,16 +135,13 @@ fun AppBar(screen: String, navHostController: NavHostController) {
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Clear,
-                                        contentDescription = "Clear Search Icon", tint = Color.Black
+                                        contentDescription = "Clear Search Icon",
+                                        tint = Color.Black
                                     )
                                 }
                             }
                         },
-                        colors = TextFieldDefaults.textFieldColors(
-                            backgroundColor = Color.Transparent,
-                            focusedIndicatorColor = Color.Transparent,
-                            unfocusedIndicatorColor = Color.Transparent
-                        ),
+
                         interactionSource = interactionSource,
                         contentPadding = TextFieldDefaults.textFieldWithoutLabelPadding(
                             top = 2.dp, bottom = 2.dp
@@ -151,10 +150,12 @@ fun AppBar(screen: String, navHostController: NavHostController) {
                 }
 
             }
-
         }
+
     }
+
 }
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Preview
