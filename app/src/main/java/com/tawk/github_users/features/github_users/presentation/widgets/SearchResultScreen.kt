@@ -1,4 +1,4 @@
-package com.tawk.github_users.features.github_users.widgets
+package com.tawk.github_users.features.github_users.presentation.widgets
 
 import androidx.compose.runtime.Composable
 

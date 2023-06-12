@@ -9,8 +9,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.tawk.github_users.features.github_users.widgets.PagingListScreen
-import com.tawk.github_users.features.github_users.widgets.SearchResultScreen
+import com.tawk.github_users.features.github_users.presentation.widgets.PagingListScreen
+import com.tawk.github_users.features.github_users.presentation.widgets.SearchResultScreen
 import com.tawk.github_users.features.user_deatils.presentation.ui.widgets.UserDetailsScreen
 
 @Composable
