@@ -8,7 +8,6 @@ import com.tawk.github_users.features.github_users.data.model.UserModel
 import com.tawk.github_users.features.github_users.data.model.toUser
 import com.tawk.github_users.features.github_users.domain.enities.User
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class GithubUsersPagingSource(
@@ -26,15 +25,8 @@ class GithubUsersPagingSource(
             val remoteUsers = withContext(Dispatchers.IO) {
                 remoteDataSource.getGithubUsers(page)
             }
-
-            val newUsers = remoteUsers.filter { remoteUser ->
-                localUsers.none { localUser -> localUser.id == remoteUser.id }
-            }.distinctBy { it.id }
-
             withContext(Dispatchers.IO) {
-                launch {
-                    githubUsersDao.insertGithubUsers(newUsers)
-                }
+                githubUsersDao.insertGithubUsers(remoteUsers)
             }
 
             val finalResult: List<UserModel> = localUsers.ifEmpty { remoteUsers }
@@ -47,7 +39,18 @@ class GithubUsersPagingSource(
                 ),
             )
         } catch (e: Exception) {
-            throw e
+            return try {
+                val localUsers = withContext(Dispatchers.IO) {
+                    githubUsersDao.getAllGithubUsers()
+                }
+                LoadResult.Page(
+                    data = listOf(localUsers.map { it.toUser() }),
+                    prevKey = null,
+                    nextKey = null,
+                )
+            } catch (e: Exception) {
+                LoadResult.Error(e)
+            }
         }
     }
 

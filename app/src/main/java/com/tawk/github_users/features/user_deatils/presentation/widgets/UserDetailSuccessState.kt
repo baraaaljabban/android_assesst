@@ -1,5 +1,6 @@
 package com.tawk.github_users.features.user_deatils.presentation.widgets
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.Surface
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,11 +29,12 @@ import com.tawk.github_users.core.theme.TawkTheme
 import com.tawk.github_users.features.user_deatils.domain.enities.UserDetails
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun UserDetailSuccessState(data: UserDetails) {
 
-    TawkTheme() {
-        Surface() {
+
+        Scaffold() {
             Column(
                 modifier = Modifier
             ) {
@@ -109,5 +112,5 @@ fun UserDetailSuccessState(data: UserDetails) {
                 SimpleOutlinedTextFieldSample(note = data.note)
             }
         }
-    }
+
 }

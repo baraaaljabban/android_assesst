@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -13,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -43,27 +45,33 @@ class MainActivity : ComponentActivity(), ImageLoaderFactory {
             navController = rememberNavController()
             val backStackEntry by navController.currentBackStackEntryAsState()
             LaunchedEffect(backStackEntry) {
-                screen=  backStackEntry?.destination?.route ?:""
+                screen = backStackEntry?.destination?.route ?: ""
             }
 
 
             TawkTheme {
                 Scaffold(snackbarHost = {
-                    SnackbarHost(hostState = snackbarHostState)
+                    SnackbarHost(
+                        hostState = snackbarHostState,
+                        modifier = Modifier
+                            .padding(16.dp)
+                    )
                 }, topBar = {
-                    AppBar(screen,navController)
+                    AppBar(screen, navController)
 
                 }) { paddingValues ->
+
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
                         NavigationComposable(
                             paddingValues = paddingValues, navController = navController,
-                         )
+                        )
+
+                        OfflineSnackBar()
                     }
 
-                    OfflineSnackBar()
                 }
             }
         }

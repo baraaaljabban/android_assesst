@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tawk.github_users.features.user_deatils.presentation.vm.UserDetailsViewModel
@@ -25,7 +25,7 @@ import com.tawk.github_users.features.user_deatils.presentation.vm.UserDetailsVi
 @Composable
 fun SimpleOutlinedTextFieldSample(note: String) {
     var text by rememberSaveable { mutableStateOf(note) }
-     val viewmodel = hiltViewModel<UserDetailsViewModel>()
+    val viewmodel = hiltViewModel<UserDetailsViewModel>()
     OutlinedTextField(
         value = text,
         onValueChange = { text = it },
@@ -50,7 +50,9 @@ fun SimpleOutlinedTextFieldSample(note: String) {
 
 
                 ) {
-                Text("Save", style = TextStyle(color = Color.Black))
+                Text(
+                    "Save", style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }

@@ -14,6 +14,7 @@ import androidx.compose.material.Typography
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,6 +34,7 @@ import com.tawk.github_users.features.user_deatils.domain.enities.UserDetails
 import com.tawk.github_users.features.user_deatils.presentation.vm.FetchUserResultState
 import com.tawk.github_users.features.user_deatils.presentation.vm.UserDetailsViewModel
 
+ @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
  @Composable
 fun UserDetailsScreen(username: String, userLocalId: Int) {
     val viewModel = hiltViewModel<UserDetailsViewModel>()
@@ -43,29 +45,31 @@ fun UserDetailsScreen(username: String, userLocalId: Int) {
 
     val fetchUserResultState = viewModel.fetchUserResultState.collectAsState()
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White), contentAlignment = Alignment.Center
-    ) {
+     Scaffold() {
+         Box(
+             modifier = Modifier
+                 .fillMaxSize()
+                 .background(Color.White), contentAlignment = Alignment.Center
+         ) {
 
-        when (val resultState = fetchUserResultState.value) {
-            is FetchUserResultState.Loading -> {
-                Loader()
-            }
+             when (val resultState = fetchUserResultState.value) {
+                 is FetchUserResultState.Loading -> {
+                     Loader()
+                 }
 
-            is FetchUserResultState.Error -> {
-                val error = resultState.message
-                Text(text = error)
-            }
+                 is FetchUserResultState.Error -> {
+                     val error = resultState.message
+                     Text(text = error)
+                 }
 
-            is FetchUserResultState.Success -> {
-                val data = resultState.data
-                UserDetailSuccessState(data = data)
-            }
+                 is FetchUserResultState.Success -> {
+                     val data = resultState.data
+                     UserDetailSuccessState(data = data)
+                 }
 
-        }
-    }
+             }
+         }
+     }
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

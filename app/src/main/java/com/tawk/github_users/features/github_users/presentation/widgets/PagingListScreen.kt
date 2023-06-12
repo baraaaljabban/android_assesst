@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,13 +40,14 @@ fun PagingListScreen() {
                     Divider()
                 }
 
-                when (users.loadState.refresh) { //FIRST LOAD
+                when (val state = users.loadState.refresh) {
                     is LoadState.Error -> {
-                        //TODO Error Item
-                        //state.error to get error message
+                        item {
+                            state.error.message?.let { Text(text = it) }
+                         }
                     }
 
-                    is LoadState.Loading -> { // Loading UI
+                    is LoadState.Loading -> {
                         item {
                             Loader()
                         }
@@ -54,11 +56,14 @@ fun PagingListScreen() {
                     else -> {}
                 }
 
-                when (users.loadState.append) { // Pagination
+                when (val state = users.loadState.append) {
                     is LoadState.Error -> {
+                        item {
+                            state.error.message?.let { Text(text = it) }
+                        }
                     }
 
-                    is LoadState.Loading -> { // Pagination Loading UI
+                    is LoadState.Loading -> {
                         item {
                             Loader()
                         }
