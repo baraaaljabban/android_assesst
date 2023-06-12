@@ -6,6 +6,12 @@ import retrofit2.http.Path
 
 
 interface UserDetailsAPIService {
+    /**
+     * Retrieves the details of a user from the remote data source.
+     *
+     * @param username The username of the user to fetch details for.
+     * @return The [UserDetailsModel] representing the user's details.
+     */
     @GET("users/{username}")
     suspend fun getUserDetails(@Path("username") username: String): UserDetailsModel
 

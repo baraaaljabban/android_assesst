@@ -11,6 +11,12 @@ import javax.inject.Inject
 data class ConnectivityState(val isConnected: Boolean)
 
 
+/**
+ * ConnectivityMonitor will be used as network watcher to show a snackbar
+ * when user is connected to internet source
+ *
+ * @param connectivityManager
+ */
 class ConnectivityMonitor @Inject constructor(
     private val connectivityManager: ConnectivityManager
 )  {

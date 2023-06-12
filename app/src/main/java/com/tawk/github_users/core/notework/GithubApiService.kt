@@ -7,7 +7,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+/**
+ * Builds a Retrofit instance with the provided connectivity interceptor.
+ *
+ * @param connectivityInterceptor The connectivity interceptor to be added to the OkHttpClient.
+ * @return A Retrofit instance configured with the OkHttpClient and base URL.
+ */
 fun retrofitBuilder(connectivityInterceptor: ConnectivityInterceptor): Retrofit {
 
     val requestInterceptor = Interceptor { chain ->

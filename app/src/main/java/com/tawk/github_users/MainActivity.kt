@@ -88,11 +88,18 @@ class MainActivity : ComponentActivity(), ImageLoaderFactory {
         EventBus.getDefault().unregister(this)
     }
 
+    /**
+     * Event handler for the user selected event.
+     * Navigates to the user details screen based on the event data.
+     */
     @Subscribe
     fun onItemSelected(event: UserDetailsScreenArgsEvent) {
         navController.navigate("user/${event.username}/${event.userLocalId}")
     }
 
+    /**
+     * to cache the images in the local data base
+     */
     override fun newImageLoader(): ImageLoader {
         return ImageLoader.Builder(this).memoryCache {
             MemoryCache.Builder(this).maxSizePercent(0.25).build()

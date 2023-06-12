@@ -45,6 +45,11 @@ class UserDetailsViewModel @Inject constructor(
 
     }
 
+    /**
+     * Saves or updates the note for the user with the current [userLocalId].
+     *
+     * @param note The note to be saved or updated.
+     */
     fun saveUpdateUserNote(note: String) {
         if (userLocalId > -1 && !note.isNullOrEmpty()) {
             viewModelScope.launch {

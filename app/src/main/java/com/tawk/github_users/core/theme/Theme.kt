@@ -15,6 +15,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+/**
+ * The dark color scheme for the Tawk theme.
+ *
+ * @property primary The primary color for dark mode.
+ * @property secondary The secondary color for dark mode.
+ * @property tertiary The tertiary color for dark mode.
+ * @property background The background color for dark mode.
+ * @property onSurface The color for text and icons on dark surfaces.
+ * @property surface The surface color for dark mode.
+ * @property onPrimary The color for text and icons on the primary dark color.
+ * @property onBackground The color for text and icons on the dark background.
+ */
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
@@ -25,7 +37,13 @@ private val DarkColorScheme = darkColorScheme(
     onPrimary = Purple80, onBackground = PurpleGrey80,
 
 )
-
+/**
+ * Defines the light color scheme for the Tawk theme.
+ *
+ * @param primary The primary color.
+ * @param secondary The secondary color.
+ * @param tertiary The tertiary color.
+ */
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
@@ -33,6 +51,13 @@ private val LightColorScheme = lightColorScheme(
 
 )
 
+/**
+ * Composable function that sets up the Tawk theme.
+ *
+ * @param darkTheme Whether to use the dark theme or not. Defaults to the system's dark theme setting.
+ * @param dynamicColor Whether to use dynamic colors based on the system settings on Android 12+.
+ * @param content The content composable.
+ */
 @Composable
 fun TawkTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

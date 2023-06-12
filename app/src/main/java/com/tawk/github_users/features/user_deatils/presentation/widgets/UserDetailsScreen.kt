@@ -34,6 +34,7 @@ import com.tawk.github_users.features.user_deatils.domain.enities.UserDetails
 import com.tawk.github_users.features.user_deatils.presentation.vm.FetchUserResultState
 import com.tawk.github_users.features.user_deatils.presentation.vm.UserDetailsViewModel
 
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun UserDetailsScreen(username: String, userLocalId: Int) {

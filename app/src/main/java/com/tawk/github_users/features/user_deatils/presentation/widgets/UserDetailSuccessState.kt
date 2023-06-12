@@ -28,7 +28,11 @@ import coil.compose.rememberAsyncImagePainter
 import com.tawk.github_users.core.theme.TawkTheme
 import com.tawk.github_users.features.user_deatils.domain.enities.UserDetails
 
-
+/**
+ * Composable function for displaying the UI state when user details are successfully fetched.
+ *
+ * @param data The user details data to be displayed.
+ */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun UserDetailSuccessState(data: UserDetails) {

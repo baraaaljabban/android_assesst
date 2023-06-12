@@ -1,7 +1,6 @@
 package com.tawk.github_users.features.common
 
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -36,7 +35,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.tawk.github_users.core.navigator.ROUTE_USER
 import com.tawk.github_users.core.navigator.SEARCH_RESULT
-
+/**
+ * Composable function that displays the app bar based on the current screen.
+ *
+ * @param screen The current screen route.
+ * @param navHostController The [NavHostController] used for navigation.
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AppBar(screen: String, navHostController: NavHostController) {
