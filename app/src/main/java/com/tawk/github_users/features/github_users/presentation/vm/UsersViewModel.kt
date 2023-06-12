@@ -24,7 +24,6 @@ class UsersViewModel @Inject constructor(
 ) : ConnectivityViewModel(connectivityMonitor) {
     var usersData: Flow<PagingData<List<User>>>? = null
     private var isDataFetched = false
-    private val _isButtonVisible = MutableStateFlow(false)
 
     private val _searchResults = MutableStateFlow<UserSearchResult>(
         UserSearchResult.Success(
