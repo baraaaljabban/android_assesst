@@ -7,6 +7,14 @@ import com.tawk.github_users.core.excepition.NetworkConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
 
+/**
+ * [ConnectivityInterceptorImpl] will throw [NetworkConnectivityException] if the device
+ * was offline
+ *
+ * if the device was online then it will proceed with the request
+ *
+ * this class will be used as Interceptor with retrofit
+ */
 class ConnectivityInterceptorImpl (context:Context): ConnectivityInterceptor {
     private val appContext = context.applicationContext
     override fun intercept(chain: Interceptor.Chain): Response {

@@ -12,7 +12,12 @@ import androidx.navigation.navArgument
 import com.tawk.github_users.features.github_users.presentation.widgets.PagingListScreen
 import com.tawk.github_users.features.github_users.presentation.widgets.SearchResultScreen
 import com.tawk.github_users.features.user_deatils.presentation.widgets.UserDetailsScreen
-
+/**
+ * Composable function representing the main navigation flow of the app.
+ *
+ * @param paddingValues The padding values to apply to the content within the navigation flow.
+ * @param navController The NavHostController responsible for handling navigation actions.
+ */
 @Composable
 fun NavigationComposable(
     paddingValues: PaddingValues,
@@ -58,17 +63,24 @@ fun NavigationComposable(
     }
 }
 
-
+/**
+ * Event data class representing the arguments for the UserDetailsScreen.
+ *
+ * @param username The username of the user.
+ * @param userLocalId The local ID of the user.
+ */
 data class UserDetailsScreenArgsEvent(
     val username: String,
     val userLocalId: Int
 
 )
 
+// Argument keys for passing data between screens
 private const val ARG_USER_NAME = "name"
 private const val ARG_USER_Local_ID = "localId"
 private const val QUERY = "query"
 
+// Route constants for navigation
 const val ROUTE_USERS = "users"
 const val ROUTE_USER = "user/{$ARG_USER_NAME}/{$ARG_USER_Local_ID}"
 const val SEARCH_RESULT = "searchResult/{$QUERY}"

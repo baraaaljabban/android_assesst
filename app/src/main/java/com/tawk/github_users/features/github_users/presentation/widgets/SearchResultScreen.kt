@@ -11,6 +11,11 @@ import com.tawk.github_users.core.theme.TawkTheme
 import com.tawk.github_users.features.github_users.presentation.vm.UserSearchResult
 import com.tawk.github_users.features.github_users.presentation.vm.UsersViewModel
 
+/**
+ * Composable function for displaying the search results screen.
+ *
+ * @param query The search query.
+ */
 @Composable
 fun SearchResultScreen(query: String) {
     val viewModel= hiltViewModel<UsersViewModel>()
@@ -38,5 +43,4 @@ fun SearchResultScreen(query: String) {
             }
         }
     }
-
 }

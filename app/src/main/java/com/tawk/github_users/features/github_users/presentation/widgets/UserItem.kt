@@ -25,6 +25,12 @@ import com.tawk.github_users.core.navigator.UserDetailsScreenArgsEvent
 import com.tawk.github_users.features.github_users.domain.enities.User
 import org.greenrobot.eventbus.EventBus
 
+/**
+ * Composable function for rendering a user item in the list.
+ *
+ * @param user The user object to display.
+ * @param index The index of the user item, and this will determine if the image should be inverted or not.
+ */
 @Composable
 fun UserItem(user: User, index: Int) {
     val shouldInvertColors = (index + 1) % 4 == 0

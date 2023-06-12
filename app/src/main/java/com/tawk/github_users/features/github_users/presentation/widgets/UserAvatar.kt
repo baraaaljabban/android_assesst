@@ -16,6 +16,15 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 
+/**
+ * Composable function for displaying a user's avatar image.
+ *
+ * @param userAvatarURL The URL of the user's avatar image to load.
+ * @param shouldShowInvertColor Whether to invert the colors of the avatar image.
+ * @param isRounded Whether the avatar image should be displayed with rounded corners.
+ * @param height The height of the avatar image.
+ * @param width The width of the avatar image.
+ */
 @Composable
 fun UserAvatar(
     userAvatarURL: String,
