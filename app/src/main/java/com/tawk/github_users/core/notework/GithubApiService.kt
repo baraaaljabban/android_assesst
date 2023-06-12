@@ -29,7 +29,7 @@ fun retrofitBuilder(connectivityInterceptor: ConnectivityInterceptor): Retrofit 
             HttpLoggingInterceptor()
                 .apply { this.level = HttpLoggingInterceptor.Level.BODY })
         .addInterceptor { chain ->
-            val request = chain.request().newBuilder().addHeader("Authorization", "Bearer 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").build()
+            val request = chain.request().newBuilder().addHeader("Authorization", "Bearer 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").build()
             chain.proceed(request)}
         .addInterceptor(connectivityInterceptor)
         .build()
