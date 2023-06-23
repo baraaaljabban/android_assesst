@@ -28,7 +28,7 @@ class GithubUsersRepositoryImpl @Inject constructor(
      */
     override suspend fun getSavedGithubUsers(): List<User> {
         val result = githubUsersDao.getAllGithubUsers()
-        return ((result.map { it.toUser() }))
+        return result.map { it.toUser() }
     }
 
     /**
